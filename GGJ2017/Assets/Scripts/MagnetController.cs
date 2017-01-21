@@ -26,6 +26,12 @@ public class MagnetController : MonoBehaviour {
         AplyMagnetForce(targetRb2d, magnetForceDir);
     }
 
+    public void AplyMagnetForce(Rigidbody2D targetRb2d, int polarity, int targetPolarity) {
+        Vector2 magnetForceDir = targetRb2d.position - (Vector2)transform.position;
+        magnetForceDir *= polarity * targetPolarity;
+        AplyMagnetForce(targetRb2d, magnetForceDir);
+    }
+
     void AplyMagnetForce(Rigidbody2D targetRb2d, Vector2 magnetForceDir) {
         if(magnetForceDir.sqrMagnitude < magnetMaxRange) {
             magnetForceDir = magnetForceDir.normalized * magnectForce;
