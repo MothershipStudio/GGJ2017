@@ -11,10 +11,19 @@ public class Player : MonoBehaviour {
         ztargeter = GetComponent<ZTargeter>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        if(Input.GetKeyDown(KeyCode.Z)) {
-            ztargeter.ai
+        if(Input.GetKeyDown(KeyCode.Q)) {
+            if(ztargeter.currentTargetPositive != null)
+                ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.clear);
+            ztargeter.AimPositive();
+            ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.red);
         }
-	}
+
+        if(Input.GetKeyDown(KeyCode.E)) {
+            if(ztargeter.currentTargetNegative != null)
+                ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.clear);
+            ztargeter.AimNegative();
+            ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.blue);
+        }
+    }
 }

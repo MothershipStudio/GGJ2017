@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class ZTargeter : MonoBehaviour {
     public LayerMask targetMask;
-    public Rigidbody2D currentTarget { get; set; }
+    public Rigidbody2D currentTargetPositive { get; private set; }
+    public Rigidbody2D currentTargetNegative { get; private set; }
+    
     SortedList<float, Rigidbody2D> targets = new SortedList<float, Rigidbody2D>();
 
     Vector2 w_screen_size;
-    int currentTargetIndex = 0;
+    int currentTargetIndexPositive = 0;
+    int currentTargetIndexNegative = 0;
 
     private void Start() {
         w_screen_size = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
@@ -17,25 +20,29 @@ public class ZTargeter : MonoBehaviour {
     private void Update() {
         if(Input.GetMouseButtonDown(0)) {
             UpdateTargets();
+            Debug.Log("Updated targets");
             foreach(var target in targets) {
                 Debug.Log(target.Value.name);
             }
         }
     }
 
-    public void Aim() {
-        currentTarget = targets.Values[currentTargetIndex];
-        currentTargetIndex = (currentTargetIndex + 1) % targets.Count;
-
+    public void AimPositive() {
+        UpdateTargets();
+        currentTargetPositive = targets.Values[currentTargetIndexPositive];
+        currentTargetIndexPositive = (currentTargetIndexPositive + 1) % targets.Count;
     }
 
-    void Unaim() {
-        currentTargetIndex = 0;
+    public void AimNegative() {
+        UpdateTargets();
+        currentTargetNegative = targets.Values[currentTargetIndexNegative];
+        currentTargetIndexNegative = (currentTargetIndexNegative + 1) % targets.Count;
     }
 
     void UpdateTargets() {
         targets.Clear();
         var hits = Physics2D.BoxCastAll(Camera.main.transform.position, w_screen_size * 100, 0, Vector2.zero, 0, targetMask);
+        Debug.Log(hits.Length);
 
         foreach(var hit in hits) {
             var tpos = hit.transform.position;
