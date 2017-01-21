@@ -1,40 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PatrollingObject : MonoBehaviour
 {
 
     public Transform[] targets;
-    public int current { get; private set; }
-    public int next { get; private set; }
+    [HideInInspector]
+    public int current = 0;
+    [HideInInspector]
+    public int next = 1;
 
     public float speed = 5f;
-    public bool moving = false;
+    private bool moving = false;
+
+    public UnityEvent<Collision2D, PatrollingObject> OnObjectOnTrack;
 
     private Rigidbody2D rb;
 
-    private void Start()
+    public virtual void StartPatrol()
     {
         current = 0;
         next = 1;
         rb = GetComponent<Rigidbody2D>();
+        this.moving = true;
+
+        OnObjectOnTrack = new CollisionEvent();
     }
 
-    public void StartMoving()
+
+    public virtual void StartMoving()
     {
         moving = true;
     }
 
-    public void StopMoving()
+    public virtual void StopMoving()
     {
         moving = false;
         rb.velocity = Vector3.zero;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
 
         if (moving)
@@ -51,17 +60,33 @@ public class PatrollingObject : MonoBehaviour
 
             if (Vector2.Dot(targets[current].position - rb.transform.position, movement) < 0)
             {
-                if (next < current)
-                {
-                    next--;
-                    current--;
-                }
-                else
-                {
-                    next++;
-                    current++;
-                }
+                UpdateNext();
             }
         }
     }
+
+    private void UpdateNext()
+    {
+        if (next < current)
+        {
+            next--;
+            current--;
+        }
+        else
+        {
+            next++;
+            current++;
+        }
+    }
+
+    protected void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (OnObjectOnTrack != null)
+            OnObjectOnTrack.Invoke(collision, this);
+    }
+}
+
+public class CollisionEvent : UnityEvent<Collision2D, PatrollingObject>
+{
+
 }

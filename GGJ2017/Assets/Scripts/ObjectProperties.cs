@@ -13,9 +13,14 @@ public class ObjectProperties : MonoBehaviour
         Negative = -1
     }
 
+    public enum DamageOn
+    {
+        PlayerOnly,
+        EnemyOnly,
+        Both
+    }
+
+    public DamageOn Damages;
     public float Damage = 0f;
     public Polarity ObjectPolarity;
-
-    public Vector2 Knockback;
-    
 }
