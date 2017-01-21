@@ -4,9 +4,30 @@ using UnityEngine;
 
 public class ZTargeter : MonoBehaviour {
     public LayerMask targetMask;
-    public Rigidbody2D currentTargetPositive { get; private set; }
-    public Rigidbody2D currentTargetNegative { get; private set; }
-    
+
+    private Rigidbody2D _currentTargetPositive;
+    private Rigidbody2D _currentTargetNegative;
+    public Rigidbody2D currentTargetPositive {
+        get {
+            if(_currentTargetPositive == null)
+                AimPositive();
+            return _currentTargetPositive;
+        }
+        private set {
+            _currentTargetPositive = value;
+        }
+    }
+    public Rigidbody2D currentTargetNegative {
+        get {
+            if(_currentTargetNegative == null)
+                AimNegative();
+            return _currentTargetNegative;
+        }
+        private set {
+            _currentTargetNegative = value;
+        }
+    }
+
     SortedList<float, Rigidbody2D> targets = new SortedList<float, Rigidbody2D>();
 
     Vector2 w_screen_size;
@@ -14,36 +35,33 @@ public class ZTargeter : MonoBehaviour {
     int currentTargetIndexNegative = 0;
 
     private void Start() {
-        w_screen_size = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-    }
-
-    private void Update() {
-        if(Input.GetMouseButtonDown(0)) {
-            UpdateTargets();
-            Debug.Log("Updated targets");
-            foreach(var target in targets) {
-                Debug.Log(target.Value.name);
-            }
-        }
+        w_screen_size = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, -Camera.main.transform.position.z)) * 2;
     }
 
     public void AimPositive() {
         UpdateTargets();
-        currentTargetPositive = targets.Values[currentTargetIndexPositive];
+        if(targets.Count == 0)
+            return;
+        currentTargetPositive = targets.Values[currentTargetIndexPositive % targets.Count];
         currentTargetIndexPositive = (currentTargetIndexPositive + 1) % targets.Count;
     }
 
     public void AimNegative() {
         UpdateTargets();
-        currentTargetNegative = targets.Values[currentTargetIndexNegative];
+        if(targets.Count == 0)
+            return;
+        currentTargetNegative = targets.Values[currentTargetIndexNegative % targets.Count];
         currentTargetIndexNegative = (currentTargetIndexNegative + 1) % targets.Count;
+    }
+
+    public void Reset() {
+        _currentTargetNegative = _currentTargetPositive = null;
+        currentTargetIndexNegative = currentTargetIndexPositive = 0;
     }
 
     void UpdateTargets() {
         targets.Clear();
-        var hits = Physics2D.BoxCastAll(Camera.main.transform.position, w_screen_size * 100, 0, Vector2.zero, 0, targetMask);
-        Debug.Log(hits.Length);
-
+        var hits = Physics2D.BoxCastAll(Camera.main.transform.position, w_screen_size, 0, Vector2.zero, 0, targetMask);
         foreach(var hit in hits) {
             var tpos = hit.transform.position;
             Vector3 toTarget = tpos - transform.position;

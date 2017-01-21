@@ -1,0 +1,184 @@
+fileFormatVersion: 2
+guid: ebfb231b6cd90bc44a2f5b23b4e95150
+timeCreated: 1485020640
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: eixo_1
+    100002: eixo_2
+    100004: eixo_3
+    100006: esteira
+    100008: //RootNode
+    100010: inimigo_corpo
+    400000: eixo_1
+    400002: eixo_2
+    400004: eixo_3
+    400006: esteira
+    400008: //RootNode
+    400010: inimigo_corpo
+    2300000: eixo_1
+    2300002: eixo_2
+    2300004: eixo_3
+    2300006: esteira
+    2300008: //RootNode
+    2300010: inimigo_corpo
+    3300000: eixo_1
+    3300002: eixo_2
+    3300004: eixo_3
+    3300006: esteira
+    3300008: //RootNode
+    3300010: inimigo_corpo
+    4300000: inimigo
+    4300002: esteira
+    4300004: eixo_3
+    4300006: eixo_2
+    4300008: eixo_1
+    4300010: inimigo_corpo
+    7400000: eixo_3|eixo_1Action
+    7400002: eixo_3|eixo_1Action.001
+    7400004: eixo_3|eixo_2Action
+    7400006: eixo_3|eixo_2Action.001
+    7400008: eixo_3|eixo_3Action
+    7400010: eixo_3|inimigo_cabecaAction
+    7400012: eixo_3|inimigo_corpoAction
+    7400014: eixo_3|inimigo_corpoAction.001
+    7400016: eixo_3|inimigo_corpoAction.002
+    7400018: eixo_2|eixo_1Action
+    7400020: eixo_2|eixo_1Action.001
+    7400022: eixo_2|eixo_2Action
+    7400024: eixo_2|eixo_2Action.001
+    7400026: eixo_2|eixo_3Action
+    7400028: eixo_2|inimigo_cabecaAction
+    7400030: eixo_2|inimigo_corpoAction
+    7400032: eixo_2|inimigo_corpoAction.001
+    7400034: eixo_2|inimigo_corpoAction.002
+    7400036: eixo_1|eixo_1Action
+    7400038: eixo_1|eixo_1Action.001
+    7400040: eixo_1|eixo_2Action
+    7400042: eixo_1|eixo_2Action.001
+    7400044: eixo_1|eixo_3Action
+    7400046: eixo_1|inimigo_cabecaAction
+    7400048: eixo_1|inimigo_corpoAction
+    7400050: eixo_1|inimigo_corpoAction.001
+    7400052: eixo_1|inimigo_corpoAction.002
+    7400054: inimigo_corpo|eixo_1Action
+    7400056: inimigo_corpo|eixo_1Action.001
+    7400058: inimigo_corpo|eixo_2Action
+    7400060: inimigo_corpo|eixo_2Action.001
+    7400062: inimigo_corpo|eixo_3Action
+    7400064: inimigo_corpo|inimigo_cabecaAction
+    7400066: inimigo_corpo|inimigo_corpoAction
+    7400068: inimigo_corpo|inimigo_corpoAction.001
+    7400070: inimigo_corpo|inimigo_corpoAction.002
+    7400072: Andando
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Andando
+      takeName: Scene
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: eixo_1
+        weight: 1
+      - path: eixo_2
+        weight: 1
+      - path: eixo_3
+        weight: 1
+      - path: esteira
+        weight: 1
+      - path: inimigo_corpo
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

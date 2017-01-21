@@ -14,8 +14,8 @@ public class SimpleMagnetApplier : MonoBehaviour {
             var wmpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var hit = Physics2D.Raycast(wmpos, Vector2.zero);
             if(hit.collider != null) {
-                mc.targetRb2d = hit.collider.GetComponent<Rigidbody2D>();
-                mc.Attract();
+                //mc.targetRb2d = hit.collider.GetComponent<Rigidbody2D>();
+                //mc.Attract();
             }
         }
 
@@ -23,13 +23,13 @@ public class SimpleMagnetApplier : MonoBehaviour {
             var wmpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var hit = Physics2D.Raycast(wmpos, Vector2.zero);
             if(hit.collider != null) {
-                mc.targetRb2d = hit.collider.GetComponent<Rigidbody2D>();
-                mc.Repel();
+                //mc.targetRb2d = hit.collider.GetComponent<Rigidbody2D>();
+                //mc.Repel();
             }
         }
 
         if(Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1)) {
-            mc.Release();
+            //mc.Release();
         }
     }
 }

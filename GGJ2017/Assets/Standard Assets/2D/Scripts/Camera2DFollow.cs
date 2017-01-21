@@ -10,6 +10,8 @@ namespace UnityStandardAssets._2D
         public float lookAheadFactor = 3;
         public float lookAheadReturnSpeed = 0.5f;
         public float lookAheadMoveThreshold = 0.1f;
+        public float verticalUpperBoundary = 0.1f;
+        public float verticalLowerBoundary = 0.1f;
 
         private float m_OffsetZ;
         private Vector3 m_LastTargetPosition;
@@ -48,6 +50,7 @@ namespace UnityStandardAssets._2D
             transform.position = newPos;
 
             m_LastTargetPosition = target.position;
+            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, verticalLowerBoundary, verticalUpperBoundary), transform.position.z);
         }
     }
 }

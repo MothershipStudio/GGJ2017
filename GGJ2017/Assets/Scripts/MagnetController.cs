@@ -3,31 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MagnetController : MonoBehaviour {
-    public float magnetMaxRange = 5f;
+    public float magnetMaxRange = 30f;
     public float magnetMinRange = .01f;
     public float magnectForce = 10f;
 
     private Rigidbody2D rb2d;
-    public Rigidbody2D targetRb2d { get; set; }
-    
-    
+    float origivalGravityScale;
+
     private void Awake() {
         rb2d = GetComponent<Rigidbody2D>();
+        origivalGravityScale = origivalGravityScale = rb2d.gravityScale;
     }
 
-    //TODO: animação mesmo se for fora do range
-    public void Attract() {
-        Vector2 magnetForceDir = targetRb2d.position - (Vector2)transform.position;
-        AplyMagnetForce(targetRb2d, magnetForceDir);
-    }
-
-    public void Repel() {
-        Vector2 magnetForceDir = (Vector2)transform.position - targetRb2d.position;
-        AplyMagnetForce(targetRb2d, magnetForceDir);
-    }
-
-    public void AplyMagnetForce(Rigidbody2D targetRb2d, int polarity, int targetPolarity) {
-        Vector2 magnetForceDir = targetRb2d.position - (Vector2)transform.position;
+    public void AplyMagnetForce(Vector2 origin, Rigidbody2D targetRb2d, int polarity, int targetPolarity) {
+        Vector2 magnetForceDir = targetRb2d.position - origin;
         magnetForceDir *= polarity * targetPolarity;
         AplyMagnetForce(targetRb2d, magnetForceDir);
     }
@@ -38,17 +27,22 @@ public class MagnetController : MonoBehaviour {
             //TODO: aplicar obj sem atrito
             if(rb2d.mass < targetRb2d.mass) {
                 rb2d.gravityScale = 0;
-                rb2d.velocity = magnetForceDir;
+                rb2d.AddForce(magnetForceDir);
 
             } else {
                 targetRb2d.gravityScale = 0;
-                targetRb2d.velocity = -magnetForceDir;
+                targetRb2d.AddForce(-magnetForceDir);
             }
         }
     }
 
-    public void Release() {
-        rb2d.gravityScale = 1;
-        targetRb2d.gravityScale = 1;
+    public void Release(Rigidbody2D targetRb2d) {
+        rb2d.gravityScale = origivalGravityScale;
+        if(targetRb2d != null) {
+            targetRb2d.simulated = true;
+            targetRb2d.transform.parent = (null);
+            targetRb2d.gravityScale = 1;
+        }
+            
     }
 }

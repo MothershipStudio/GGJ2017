@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2c7d0caf7665a864e964bdaf2afe136c
-timeCreated: 1484976174
+timeCreated: 1485021798
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -8,9 +8,61 @@ ModelImporter:
     100000: //RootNode
     100002: bip
     100004: bip.001
+    100006: foot.L
+    100008: foot.R
+    100010: forearm.L
+    100012: forearm.R
+    100014: hand.L
+    100016: hand.L_end
+    100018: hand.R
+    100020: hand.R_end
+    100022: head
+    100024: head_end
+    100026: heel.L
+    100028: heel.L_end
+    100030: heel.R
+    100032: heel.R_end
+    100034: hips
+    100036: mesh
+    100038: shin.L
+    100040: shin.R
+    100042: thigh.L
+    100044: thigh.R
+    100046: toe.L
+    100048: toe.L_end
+    100050: toe.R
+    100052: toe.R_end
+    100054: upper_arm.L
+    100056: upper_arm.R
     400000: //RootNode
     400002: bip
     400004: bip.001
+    400006: foot.L
+    400008: foot.R
+    400010: forearm.L
+    400012: forearm.R
+    400014: hand.L
+    400016: hand.L_end
+    400018: hand.R
+    400020: hand.R_end
+    400022: head
+    400024: head_end
+    400026: heel.L
+    400028: heel.L_end
+    400030: heel.R
+    400032: heel.R_end
+    400034: hips
+    400036: mesh
+    400038: shin.L
+    400040: shin.R
+    400042: thigh.L
+    400044: thigh.R
+    400046: toe.L
+    400048: toe.L_end
+    400050: toe.R
+    400052: toe.R_end
+    400054: upper_arm.L
+    400056: upper_arm.R
     2300000: bip
     2300002: bip.001
     2300004: //RootNode
@@ -19,6 +71,9 @@ ModelImporter:
     3300004: //RootNode
     4300000: bip.001
     4300002: bip
+    4300004: mesh
+    9500000: //RootNode
+    13700000: mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -29,11 +84,12 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    animationImportErrors: 
+    animationImportErrors: "Avatar creation failed:\n\tTransform 'head' is not an
+      ancestor of 'upper_arm.L'\n"
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -43,7 +99,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 200
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -78,10 +134,10 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
