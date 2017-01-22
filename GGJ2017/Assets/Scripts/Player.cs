@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    public Transform plusHand;
-    public Transform minusHand;
+    public Transform hand;
     private MagnetController magnetController;
     private ZTargeter ztargeter;
 
@@ -17,12 +16,16 @@ public class Player : MonoBehaviour {
 
     public float KnockbackForce = 20f;
     public int MaxLife = 100, CurrentLife = 100;
+    public GameObject redWave;
+    public GameObject blueWave;
+    Animator animator;
 
     void Start() {
         magnetController = GetComponent<MagnetController>();
         ztargeter = GetComponent<ZTargeter>();
         armsTrigger = GetComponentsInChildren<ArmsTrigger>();
         rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
 
         for(int i = 0; i < armsTrigger.Length; i++) {
             armsTrigger[i].onTriggerEnter.AddListener(OnArmsTriggerEnter);
@@ -126,18 +129,25 @@ public class Player : MonoBehaviour {
         {
             if (applyingPositive)
             {
-                if ((ztargeter.currentTargetPositive.position - (Vector2)plusHand.position).sqrMagnitude > 2 * magnetController.magnetMaxRange)
+                var hand2target = ztargeter.currentTargetPositive.position - (Vector2)hand.position;
+                if ((hand2target).sqrMagnitude > 2 * magnetController.magnetMaxRange)
                     ztargeter.AimPositive();
-                magnetController.AplyMagnetForce(plusHand.position, ztargeter.currentTargetPositive, 1, 1);
+                magnetController.AplyMagnetForce(hand.position, ztargeter.currentTargetPositive, 1, 1);
+                redWave.transform.rotation = Quaternion.Euler(180 - Mathf.Acos(Vector2.Dot(hand2target.normalized, Vector2.right)) * Mathf.Rad2Deg, 90, 90);
             }
 
             if (applyingNegative)
             {
-                if ((ztargeter.currentTargetNegative.position - (Vector2)plusHand.position).sqrMagnitude > 2 * magnetController.magnetMaxRange)
+                var hand2target = ztargeter.currentTargetNegative.position - (Vector2)hand.position;
+                if ((hand2target).sqrMagnitude > 2 * magnetController.magnetMaxRange)
                     ztargeter.AimNegative();
-                magnetController.AplyMagnetForce(minusHand.position, ztargeter.currentTargetPositive, -1, 1);
+                magnetController.AplyMagnetForce(hand.position, ztargeter.currentTargetPositive, -1, 1);
+                blueWave.transform.rotation = Quaternion.Euler(180 - Mathf.Acos( Vector2.Dot(hand2target.normalized, Vector2.right)) * Mathf.Rad2Deg, 90, 90);
             }
 
+            animator.SetBool("plusFiring", applyingPositive || applyingNegative);
+            redWave.SetActive(applyingPositive);
+            blueWave.SetActive(applyingNegative);
         }
     }
 
