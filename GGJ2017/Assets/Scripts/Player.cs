@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets._2D;
 
 public class Player : MonoBehaviour {
+    public UnityEvent onKill;
     public Transform hand;
     private MagnetController magnetController;
     private ZTargeter ztargeter;
@@ -133,7 +135,7 @@ public class Player : MonoBehaviour {
 
     public void KillIt()
     {
-
+        onKill.Invoke();
     } 
 
     private void FixedUpdate() {
