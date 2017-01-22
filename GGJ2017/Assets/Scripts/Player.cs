@@ -13,6 +13,11 @@ public class Player : MonoBehaviour {
     private ArmsTrigger[] armsTrigger;
     private Rigidbody2D rb2d;
 
+    private bool isAlive = true;
+
+    public float KnockbackForce = 20f;
+    public int MaxLife = 100, CurrentLife = 100;
+
     void Start() {
         magnetController = GetComponent<MagnetController>();
         ztargeter = GetComponent<ZTargeter>();
@@ -49,56 +54,91 @@ public class Player : MonoBehaviour {
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Q)) {
-            if(ztargeter.currentTargetPositive != null)
-                ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.clear);
-            ztargeter.AimPositive();
-            ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.black);
-        }
+        if (isAlive)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (ztargeter.currentTargetPositive != null)
+                    ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.clear);
+                ztargeter.AimPositive();
+                ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.black);
+            }
 
-        if(Input.GetKeyDown(KeyCode.E)) {
-            if(ztargeter.currentTargetNegative != null)
-                ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.clear);
-            ztargeter.AimNegative();
-            ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.blue);
-        }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (ztargeter.currentTargetNegative != null)
+                    ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.clear);
+                ztargeter.AimNegative();
+                ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.blue);
+            }
 
-        if(Input.GetKeyDown(KeyCode.Z)) {
-            SetArmsActivate(true);
-            applyingPositive = true;
-        }
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                SetArmsActivate(true);
+                applyingPositive = true;
+            }
 
-        if(Input.GetKeyDown(KeyCode.C)) {
-            SetArmsActivate(true);
-            applyingNegative = true;
-        }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                SetArmsActivate(true);
+                applyingNegative = true;
+            }
 
-        if(Input.GetKeyUp(KeyCode.Z)) {
-            SetArmsActivate(false);
-            applyingPositive = false;
-            magnetController.Release(ztargeter.currentTargetPositive);
-        }
+            if (Input.GetKeyUp(KeyCode.Z))
+            {
+                SetArmsActivate(false);
+                applyingPositive = false;
+                magnetController.Release(ztargeter.currentTargetPositive);
+            }
 
-        if(Input.GetKeyUp(KeyCode.C)) {
-            SetArmsActivate(false);
-            applyingNegative = false;
-            magnetController.Release(ztargeter.currentTargetNegative);
+            if (Input.GetKeyUp(KeyCode.C))
+            {
+                SetArmsActivate(false);
+                applyingNegative = false;
+                magnetController.Release(ztargeter.currentTargetNegative);
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var op = collision.gameObject.GetComponent<ObjectProperties>();
+
+        if (op != null)
+        {
+            if (op.Damages == ObjectProperties.DamageOn.PlayerOnly || op.Damages == ObjectProperties.DamageOn.Both)
+            {
+                this.CurrentLife -= (int)(op.Damage);
+                if (this.CurrentLife <= 0)
+                {
+                    //TODO: funcao de morte
+                    isAlive = false;
+                }
+
+                var knockback = (this.transform.position - collision.transform.position).normalized * KnockbackForce;
+                GetComponent<Rigidbody2D>().AddForce(knockback);
+            }
         }
     }
 
     private void FixedUpdate() {
-        if(applyingPositive) {
-            if((ztargeter.currentTargetPositive.position - (Vector2)plusHand.position).sqrMagnitude > 2 * magnetController.magnetMaxRange)
-                ztargeter.AimPositive();
-            magnetController.AplyMagnetForce(plusHand.position, ztargeter.currentTargetPositive, 1, 1);
-        }
+        if (isAlive)
+        {
+            if (applyingPositive)
+            {
+                if ((ztargeter.currentTargetPositive.position - (Vector2)plusHand.position).sqrMagnitude > 2 * magnetController.magnetMaxRange)
+                    ztargeter.AimPositive();
+                magnetController.AplyMagnetForce(plusHand.position, ztargeter.currentTargetPositive, 1, 1);
+            }
 
-        if(applyingNegative) {
-            if((ztargeter.currentTargetNegative.position - (Vector2)plusHand.position).sqrMagnitude > 2 * magnetController.magnetMaxRange)
-                ztargeter.AimNegative();
-            magnetController.AplyMagnetForce(minusHand.position, ztargeter.currentTargetPositive, -1, 1);
-        }
+            if (applyingNegative)
+            {
+                if ((ztargeter.currentTargetNegative.position - (Vector2)plusHand.position).sqrMagnitude > 2 * magnetController.magnetMaxRange)
+                    ztargeter.AimNegative();
+                magnetController.AplyMagnetForce(minusHand.position, ztargeter.currentTargetPositive, -1, 1);
+            }
 
+        }
     }
 
 }
