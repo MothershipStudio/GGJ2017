@@ -111,8 +111,8 @@ public class Player : MonoBehaviour {
                 this.CurrentLife -= (int)(op.Damage);
                 if (this.CurrentLife <= 0)
                 {
-                    //TODO: funcao de morte
                     isAlive = false;
+                    KillIt();
                 }
 
                 var knockback = (this.transform.position - collision.transform.position).normalized * KnockbackForce;
@@ -120,6 +120,11 @@ public class Player : MonoBehaviour {
             }
         }
     }
+
+    public void KillIt()
+    {
+
+    } 
 
     private void FixedUpdate() {
         if (isAlive)
