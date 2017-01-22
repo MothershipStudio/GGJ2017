@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public Transform plusHand;
     public Transform minusHand;
+    public Transform plusArm;
+    public Transform minusArm;
     private MagnetController magnetController;
     private ZTargeter ztargeter;
 
@@ -94,6 +96,9 @@ public class Player : MonoBehaviour {
             if((ztargeter.currentTargetPositive.position - (Vector2)plusHand.position).sqrMagnitude > 2 * magnetController.magnetMaxRange)
                 ztargeter.AimPositive();
             magnetController.AplyMagnetForce(plusHand.position, ztargeter.currentTargetPositive, 1, 1);
+            var plusDir = (ztargeter.currentTargetPositive.position - (Vector2)plusHand.position).normalized;
+            //plusArm.Rotate(new Vector3(0, 0, Mathf.Acos()))
+            Debug.Log(plusArm.rotation.eulerAngles);
         }
 
         if(applyingNegative) {
