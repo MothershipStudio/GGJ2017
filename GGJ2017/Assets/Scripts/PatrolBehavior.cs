@@ -16,6 +16,10 @@ public static class PatrolBehavior
             var t = po.current;
             po.current = po.next;
             po.next = t;
+
+            var l = po.gameObject.transform.localScale;
+            l.y = l.y * -1;
+            po.gameObject.transform.localScale = l;
         }
     }
 
