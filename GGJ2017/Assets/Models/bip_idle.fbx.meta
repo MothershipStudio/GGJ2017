@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d6997bb1045fac14d9294112a0dba67e
-timeCreated: 1485053800
+guid: bf7eed7599603db409269a2141745772
+timeCreated: 1485056708
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -85,7 +85,91 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 12
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bip
+        weight: 1
+      - path: bip/hips
+        weight: 1
+      - path: bip/hips/head
+        weight: 1
+      - path: bip/hips/head/head_end
+        weight: 1
+      - path: bip/hips/thigh.L
+        weight: 1
+      - path: bip/hips/thigh.L/shin.L
+        weight: 1
+      - path: bip/hips/thigh.L/shin.L/foot.L
+        weight: 1
+      - path: bip/hips/thigh.L/shin.L/foot.L/toe.L
+        weight: 1
+      - path: bip/hips/thigh.L/shin.L/foot.L/toe.L/toe.L_end
+        weight: 1
+      - path: bip/hips/thigh.L/shin.L/heel.L
+        weight: 1
+      - path: bip/hips/thigh.L/shin.L/heel.L/heel.L_end
+        weight: 1
+      - path: bip/hips/thigh.R
+        weight: 1
+      - path: bip/hips/thigh.R/shin.R
+        weight: 1
+      - path: bip/hips/thigh.R/shin.R/foot.R
+        weight: 1
+      - path: bip/hips/thigh.R/shin.R/foot.R/toe.R
+        weight: 1
+      - path: bip/hips/thigh.R/shin.R/foot.R/toe.R/toe.R_end
+        weight: 1
+      - path: bip/hips/thigh.R/shin.R/heel.R
+        weight: 1
+      - path: bip/hips/thigh.R/shin.R/heel.R/heel.R_end
+        weight: 1
+      - path: bip/hips/upper_arm.L
+        weight: 1
+      - path: bip/hips/upper_arm.L/forearm.L
+        weight: 1
+      - path: bip/hips/upper_arm.L/forearm.L/hand.L
+        weight: 1
+      - path: bip/hips/upper_arm.L/forearm.L/hand.L/hand.L_end
+        weight: 1
+      - path: bip/hips/upper_arm.R
+        weight: 1
+      - path: bip/hips/upper_arm.R/forearm.R
+        weight: 1
+      - path: bip/hips/upper_arm.R/forearm.R/hand.R
+        weight: 1
+      - path: bip/hips/upper_arm.R/forearm.R/hand.R/hand.R_end
+        weight: 1
+      - path: mesh
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
