@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets._2D;
 
 public class Player : MonoBehaviour {
@@ -60,6 +61,11 @@ public class Player : MonoBehaviour {
     void Update() {
         if (isAlive)
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(1);
+            }
+
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 if (ztargeter.currentTargetPositive != null)
