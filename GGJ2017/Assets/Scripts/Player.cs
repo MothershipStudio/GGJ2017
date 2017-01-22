@@ -96,11 +96,6 @@ public class Player : MonoBehaviour {
             if((ztargeter.currentTargetPositive.position - (Vector2)plusHand.position).sqrMagnitude > 2 * magnetController.magnetMaxRange)
                 ztargeter.AimPositive();
             magnetController.AplyMagnetForce(plusHand.position, ztargeter.currentTargetPositive, 1, 1);
-            var plusDir = (ztargeter.currentTargetPositive.position - (Vector2)plusHand.position).normalized;
-            var angle = Mathf.Acos(Vector2.Dot(plusDir, Vector2.right)) * Mathf.Rad2Deg;
-
-            //plusArm.Rotate(new Vector3(0, 0, Mathf.Acos()))
-            //Debug.Log(angle);
         }
 
         if(applyingNegative) {
