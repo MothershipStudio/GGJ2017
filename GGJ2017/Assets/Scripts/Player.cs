@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets._2D;
 
 public class Player : MonoBehaviour {
     public Transform hand;
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour {
 
     private bool isAlive = true;
 
-    public float KnockbackForce = 20f;
+    public float KnockbackForce = 5000f;
     public int MaxLife = 100, CurrentLife = 100;
     public GameObject redWave;
     public GameObject blueWave;
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour {
                 }
 
                 var knockback = (this.transform.position - collision.transform.position).normalized * KnockbackForce;
-                GetComponent<Rigidbody2D>().AddForce(knockback);
+                GetComponent<Rigidbody2D>().AddForce(knockback, ForceMode2D.Impulse);
             }
         }
     }
