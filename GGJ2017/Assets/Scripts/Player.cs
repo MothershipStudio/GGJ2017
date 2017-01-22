@@ -84,26 +84,26 @@ public class Player : MonoBehaviour {
                 ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.blue);
             }
 
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetMouseButtonDown(0))
             {
                 SetArmsActivate(true);
                 applyingPositive = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetMouseButtonDown(1))
             {
                 SetArmsActivate(true);
                 applyingNegative = true;
             }
 
-            if (Input.GetKeyUp(KeyCode.Z))
+            if (Input.GetMouseButtonUp(0))
             {
                 SetArmsActivate(false);
                 applyingPositive = false;
                 magnetController.Release(ztargeter.currentTargetPositive);
             }
 
-            if (Input.GetKeyUp(KeyCode.C))
+            if (Input.GetMouseButtonUp(1))
             {
                 SetArmsActivate(false);
                 applyingNegative = false;
