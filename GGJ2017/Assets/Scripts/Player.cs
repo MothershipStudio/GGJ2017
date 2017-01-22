@@ -70,18 +70,20 @@ public class Player : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                if (ztargeter.currentTargetPositive != null)
+                if (ztargeter.currentTargetPositive != null && ztargeter.currentTargetPositive.GetComponent<Renderer>())
                     ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.clear);
                 ztargeter.AimPositive();
-                ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.black);
+                if(ztargeter.currentTargetPositive.GetComponent<Renderer>())
+                    ztargeter.currentTargetPositive.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.black);
             }
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (ztargeter.currentTargetNegative != null)
+                if (ztargeter.currentTargetNegative != null && ztargeter.currentTargetNegative.GetComponent<Renderer>())
                     ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.clear);
                 ztargeter.AimNegative();
-                ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.blue);
+                if(ztargeter.currentTargetPositive.GetComponent<Renderer>())
+                    ztargeter.currentTargetNegative.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.blue);
             }
 
             if (Input.GetMouseButtonDown(0))
