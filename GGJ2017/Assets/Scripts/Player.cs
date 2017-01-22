@@ -5,8 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     public Transform plusHand;
     public Transform minusHand;
-    public Transform plusArm;
-    public Transform minusArm;
     private MagnetController magnetController;
     private ZTargeter ztargeter;
 
@@ -14,9 +12,6 @@ public class Player : MonoBehaviour {
     private bool applyingNegative;
     private ArmsTrigger[] armsTrigger;
     private Rigidbody2D rb2d;
-
-    public float KnockbackForce = 20f;
-    public int MaxLife = 100, CurrentLife = 100;
 
     void Start() {
         magnetController = GetComponent<MagnetController>();
@@ -104,22 +99,6 @@ public class Player : MonoBehaviour {
             magnetController.AplyMagnetForce(minusHand.position, ztargeter.currentTargetPositive, -1, 1);
         }
 
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision) {
-        var op = collision.gameObject.GetComponent<ObjectProperties>();
-
-        if(op != null) {
-            if(op.Damages == ObjectProperties.DamageOn.PlayerOnly || op.Damages == ObjectProperties.DamageOn.Both) {
-                this.CurrentLife -= (int)(op.Damage);
-                if(this.CurrentLife <= 0) {
-                    //TODO: funcao de morte
-                }
-
-                var knockback = (this.transform.position - collision.transform.position).normalized * KnockbackForce;
-                GetComponent<Rigidbody2D>().AddForce(knockback);
-            }
-        }
     }
 
 }
