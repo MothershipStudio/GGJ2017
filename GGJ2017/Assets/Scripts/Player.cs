@@ -97,8 +97,10 @@ public class Player : MonoBehaviour {
                 ztargeter.AimPositive();
             magnetController.AplyMagnetForce(plusHand.position, ztargeter.currentTargetPositive, 1, 1);
             var plusDir = (ztargeter.currentTargetPositive.position - (Vector2)plusHand.position).normalized;
-            //plusArm.Rotate(new Vector3(0, 0, Mathf.Acos()))
-            Debug.Log(plusArm.rotation.eulerAngles);
+            var angle = Mathf.Acos(Vector2.Dot(plusDir, Vector2.right)) * Mathf.Rad2Deg;
+
+            plusArm.Rotate(new Vector3(0, 0, Mathf.Acos()))
+            Debug.Log(angle);
         }
 
         if(applyingNegative) {
