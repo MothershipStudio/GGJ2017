@@ -18,6 +18,9 @@ namespace UnityStandardAssets._2D
         private Vector3 m_CurrentVelocity;
         private Vector3 m_LookAheadPos;
 
+        //public GameObject canvas;
+        //bool isPaused;
+
         // Use this for initialization
         private void Start()
         {
@@ -30,6 +33,10 @@ namespace UnityStandardAssets._2D
         // Update is called once per frame
         private void Update()
         {
+            //if (Input.GetKey(KeyCode.Escape)) isPaused = !isPaused;
+            //if(isPaused) canvas.gameObject.SetActive(true);
+            //else canvas.gameObject.SetActive(false);
+
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (target.position - m_LastTargetPosition).x;
 
