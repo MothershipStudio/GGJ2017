@@ -9,8 +9,7 @@ public class ZTargeter : MonoBehaviour {
     private Rigidbody2D _currentTargetNegative;
     public Rigidbody2D currentTargetPositive {
         get {
-            if(_currentTargetPositive == null)
-                AimPositive();
+            AimPositive();
             return _currentTargetPositive;
         }
         private set {
@@ -19,8 +18,7 @@ public class ZTargeter : MonoBehaviour {
     }
     public Rigidbody2D currentTargetNegative {
         get {
-            if(_currentTargetNegative == null)
-                AimNegative();
+            AimNegative();
             return _currentTargetNegative;
         }
         private set {
@@ -62,11 +60,11 @@ public class ZTargeter : MonoBehaviour {
     void UpdateTargets() {
         targets.Clear();
         var hits = Physics2D.BoxCastAll(Camera.main.transform.position, w_screen_size, 0, Vector2.zero, 0, targetMask);
+        var mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         foreach(var hit in hits) {
             var tpos = hit.transform.position;
-            Vector3 toTarget = tpos - transform.position;
-            int dirMask = (int)(-Mathf.Sign(transform.lossyScale.x * toTarget.x) + 1) << 16;
-            targets.Add(Vector3.SqrMagnitude(toTarget) + dirMask, hit.collider.GetComponent<Rigidbody2D>());
+            Vector3 toTarget = tpos - mousePos;
+            targets.Add(toTarget.sqrMagnitude, hit.collider.GetComponent<Rigidbody2D>());
         }
     }
 }
